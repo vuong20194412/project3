@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi-vn" dir="ltr" class="v_element">
+<head>
+    <meta charset="UTF-8">
+    <title>Set constraints</title>
+    <style>
+        /*-----layer 0----*/
+        :root {
+            --theme-color: #FA6469BF;
+            --part-color: #A9A9A9FF;
+            --part-border-color: #FA646933;
+        }
+
+        .v_element, .v_element::before, .v_element::after {
+            box-sizing: border-box;
+        }
+
+        /*-----layer 1----*/
+        html {
+            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: #00000000;
+        }
+
+        /*-----layer 2----*/
+        body {
+            font-size: calc(13.0rem / 12.0);
+            font-weight: 400;
+            margin: 0;
+            font-family: serif;
+        }
+
+        /*-----tag--------*/
+        .v_btn {
+            border: 0;
+            outline: 0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            text-align: center;
+        }
+
+        .v_btn:hover {
+            opacity: 0.6;
+        }
+
+        .v_btn:active {
+            opacity: 0.9;
+        }
+
+        .v_li {
+            text-align: match-parent;
+            text-align: -webkit-match-parent;
+        }
+
+        .v_ul .v_li {
+            list-style-type: none;
+        }
+
+        .v_a {
+            text-decoration: none;
+            background-color: transparent;
+            color: inherit;
+        }
+
+        .v_pointer {
+            cursor: pointer;
+        }
+
+        .v_ul.v_horizontal .v_li {
+            float: left;
+        }
+    </style>
+    <style>
+        .v_body {
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: var(--part-color);
+        }
+        .v_form {
+            display: flex;
+            flex-flow: column;
+            gap: 8px;
+            background-color: #fff;
+            border: 1px var(--part-color) dotted;
+            border-radius: 4px;
+            padding: 8px;
+        }
+        .v_field {
+            display: flex;
+            gap: 8px;
+        }
+        .v_field.v_date {
+            flex-flow: row;
+            width: fit-content;
+            align-items: center;
+        }
+        .v_field.v_date > input[type=date] {
+            width: fit-content;
+        }
+        .v_field.v_text {
+            flex-flow: column;
+        }
+        .v_field.v_text > .v_textarea {
+            padding: 4px 8px;
+            max-width: 400px;
+        }
+        .v_btn {
+            box-sizing: border-box;
+            padding: 4px 8px;
+            height: 40px;
+            background-color: var(--theme-color);
+            color: #ffffff;
+            min-width: 80px;
+            width: fit-content;
+            min-height: 36px;
+            font-weight: bold;
+            border: 0;
+            outline: 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .v_btn:hover {
+            opacity: 0.6;
+        }
+        .v_btn:active {
+            opacity: 0.9;
+        }
+        input {
+            padding: 4px 8px;
+            border-radius: 4px;
+            min-height: 28px;
+        }
+    </style>
+</head>
+<body class="v_body">
+<p></p>
+<form class="v_form" method="post" action="/exams/exam/?exam_id={{ exam_id }}&mode=2">
+    {% csrf_token %}
+    {% if exam_id %}
+    <input type="hidden" name="exam_id" value="{{ exam_id }}" />
+    {% endif %}
+    <div class="v_field v_date">
+        <label for="begin_on">Thời gian bắt đầu hiển thị đề:</label>
+        <input id="begin_on" name="begin_on" type="date"/>
+    </div>
+    <div class="v_field v_date">
+        <label for="end_on">Thời gian kết thúc hiển thị đề:</label>
+        <input id="end_on" name="end_on" type="date"/>
+    </div>
+    <div class="v_field v_text">
+        <label for="user_codes">Mã các cá nhân có thể làm đề:</label>
+        <textarea id="user_codes" name="user_codes" class="v_textarea"></textarea>
+        <em>Nhập mã các cá nhân có thể làm đề cách nhau bởi dấu phẩy.</em>
+        <em>Ai cũng có thể làm thì để trống trường mã các cá nhân có thể làm đề.</em>
+    </div>
+    <button class="v_btn" type="submit">Lưu</button>
+</form>
+<p></p>
+</body>
+</html>

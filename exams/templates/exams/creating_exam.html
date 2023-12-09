@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="vi-vn" dir="ltr" class="v_element">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Exam {{ exam.id }}</title>
+    <style>
+        /*-----layer 0----*/
+        :root {
+            --theme-color: #FA6469BF;
+            --part-color: #A9A9A9FF;
+            --part-border-color: #FA646933;
+        }
+
+        .v_element, .v_element::before, .v_element::after {
+            box-sizing: border-box;
+        }
+
+        /*-----layer 1----*/
+        html {
+            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: #00000000;
+        }
+
+        /*-----layer 2----*/
+        body {
+            font-size: calc(13.0rem / 12.0);
+            font-weight: 400;
+            margin: 0;
+            font-family: serif;
+        }
+
+        /*-----tag--------*/
+        .v_btn {
+            border: 0;
+            outline: 0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            text-align: center;
+        }
+
+        .v_btn:hover {
+            opacity: 0.6;
+        }
+
+        .v_btn:active {
+            opacity: 0.9;
+        }
+
+        .v_li {
+            text-align: match-parent;
+            text-align: -webkit-match-parent;
+        }
+
+        .v_ul .v_li {
+            list-style-type: none;
+        }
+
+        .v_a {
+            text-decoration: none;
+            background-color: transparent;
+            color: inherit;
+        }
+
+        .v_pointer {
+            cursor: pointer;
+        }
+
+        .v_ul.v_horizontal .v_li {
+            float: left;
+        }
+    </style>
+    <style>
+        /*-----layer 3----*/
+        .v_main_layout {
+            display: flex;
+            flex-flow: column wrap;
+            gap: 1em;
+            justify-content: space-between;
+            min-height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /*-----layer 4----*/
+        .v_main_layout__top {
+            overflow: hidden;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            background-color: #ffffff;
+            margin-top: 0;
+            height: 100px;
+        }
+
+        .v_main_layout-down {
+            overflow: auto;
+            display: flex;
+            height: calc(100vh - 100px);
+            flex-flow: column;
+            justify-content: space-between;
+            background-color: #ffffff;
+            margin-top: 0;
+        }
+
+        /*-----layer 5----*/
+        .v_main_header {
+            overflow: hidden;
+            height: 54px;
+            background-color: var(--part-color);
+            display: flex;
+            justify-content: space-between;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .v_main_nav {
+            overflow: hidden;
+            height: 46px;
+            background-color: var(--part-color);
+            border-bottom: 1px inset var(--part-border-color);
+            border-top: 1px inset var(--part-border-color);
+            font-size: 1.1em;
+        }
+
+        .v_main_main {
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-flow: column-reverse;
+            background-color: #00000000;
+            gap: 1em;
+            justify-content: space-between;
+            padding: 8px;
+        }
+
+        .v_main_footer {
+            overflow: hidden;
+            min-height: 24px;
+            border-top: 1px inset var(--part-border-color);
+            background-color: var(--part-color);
+        }
+
+        /*-----layer 6----*/
+        .v_main_header__left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .v_main_header__right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .v_main_nav > .v_ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            align-items: center;
+        }
+
+        .v_main_main > .v_section {
+            overflow: hidden;
+            display: flex;
+            flex-flow: column;
+            min-width: 80vw;
+        }
+
+        .v_main_main > .v_sidebar {
+            overflow: hidden;
+            border: 0;
+            border-left: 1px inset var(--part-border-color);
+            background-color: var(--part-color);
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+            border-radius: 4px;
+        }
+
+        /*-----layer 7----*/
+
+        .v_main_header__right > .v_btn {
+            background-color: var(--theme-color);
+            color: #ffffff;
+            min-width: 80px;
+            width: fit-content;
+            min-height: 36px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .v_main_header__right > .v_btn > .v_a {
+            text-decoration: unset;
+            color: unset;
+        }
+
+        .v_main_nav > .v_ul > .v_li ~ .v_li {
+            border-left: 1px dotted var(--theme-color);
+        }
+
+        .v_main_nav > .v_ul > .v_li:first-child {
+            border-left: 1px dotted var(--theme-color);
+        }
+
+        .v_main_nav > .v_ul > .v_li:last-child {
+            border-right: 1px dotted var(--theme-color);
+        }
+
+        .v_main_main > .v_section > .v_form {
+            margin-bottom:0;
+        }
+
+        /*-----layer 8----*/
+        .v_main_nav > .v_ul > .v_li > .v_a {
+            display: block;
+            height: 46px;
+            line-height: 46px;
+            text-align: center;
+            padding-left: 4px;
+            padding-right: 4px;
+            color: #ffffff;
+            min-width: 160px;
+        }
+
+        .v_main_nav > .v_ul > .v_li > .v_a:hover, .v_main_nav > .v_ul > .v_li > .v_a:focus {
+            opacity: 0.6;
+            outline: none;
+        }
+
+        .v_main_nav > .v_ul > .v_li > .v_a:active {
+            opacity: 0.9;
+            outline: none;
+        }
+
+        /*-----special----*/
+        .v_user_name {
+            background-color: #ffffff;
+            border-radius: 0.8em;
+            padding: 8px 4px;
+            transform: translateX(-4px);
+        }
+        .v_exam_header {
+            display: flex;
+            height: 84px;
+            justify-content: space-between;
+        }
+
+        .v_exam_header > .v_buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .v_exam_header > .v_buttons > .v_btn {
+            font-size: 1.1em;
+            color: #ffffff;
+            background-color: var(--theme-color);
+            height: 36px;
+            min-width: 80px;
+        }
+
+        #adding_questions {
+            height: 36px;
+            min-width: 120px;
+        }
+
+        .v_exam_name {
+            margin: 4px 0;
+            padding: 0;
+        }
+        .v_exam_time {
+            margin: 4px 0;
+            padding: 0;
+        }
+        .v_quiz_list {
+            border-top: 2px inset var(--theme-color);
+            border-bottom: 1px inset var(--theme-color);
+            border-left: 1px inset var(--theme-color);
+            border-right: 1px inset var(--theme-color);
+            height: calc(100vh - 200px);
+            overflow: auto;
+        }
+        .v_quiz_list-item {
+            padding: 4px 8px;
+            display: flex;
+            flex-flow: column;
+            gap: 8px;
+        }
+        .v_quiz_list-item ~ .v_quiz_list-item{
+            border-top: 2px inset black;
+            margin-top: 4px;
+        }
+
+        .v_quiz_list-item > .v_ul {
+            padding-left: 0;
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+        .v_quiz_list-item > .v_ul > .v_li ~ .v_li {
+            margin-top: 8px;
+        }
+        .v_quiz_list-item > .v_ul > .v_li {
+            display: flex;
+            align-items: start;
+            gap: 4px;
+        }
+        .v_quiz_list-item > .v_ul > .v_li > .v_textarea {
+            width: auto;
+        }
+
+        .v_li.v_correct_answer {
+            margin-top: 8px;
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .v_quiz_list-item > .v_btn {
+            width: fit-content;
+            min-width: 80px;
+            align-self: end;
+        }
+        .v_count_done {
+            width: calc(100% - 16px);
+            background-color: white;
+            border-radius: 4px;
+            padding: 4px 8px;
+        }
+        /*----media------*/
+        @media screen (max-width: 900px and min-width: 600px), (min-width: 1100px) {
+            /*----layer 4--------*/
+            .v_main_layout__top {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+            }
+
+            .v_main_layout-down {
+                margin-top: 100px;
+                height: calc(100vh - 100px);
+            }
+             /*----layer 5--------*/
+            .v_main_main {
+                position: relative;
+                flex-flow: row;
+            }
+             /*----layer 6--------*/
+            .v_main_main > .v_sidebar {
+                min-height: 400px;
+                max-width: 20vw;
+                padding: 8px;
+                display: flex;
+                flex-flow: column;
+                gap: 8px;
+                align-items: start;
+                width: -webkit-fill-available;
+                height: -webkit-fill-available;
+            }
+            /*--*/
+            .v_main_main > .v_sidebar > .v_p {
+                margin: 0;
+                padding: 4px 8px;
+            }
+        }
+        input {
+            padding: 4px 8px;
+            border-radius: 4px;
+            min-height: 28px;
+        }
+    </style>
+</head>
+<body class="v_element">
+<div class="v_main_layout v_element">
+    <div class="v_main_layout__top v_element">
+        <header class="v_main_header v_element">
+            <div class="v_main_header__left v_element">
+                {% if user.name and user.code %}
+                    <p class="v_p v_element v_user_name">
+                        <strong>{{ user.name }}</strong>
+                        {% if user.code %}
+                            <em class="v_em v_element">({{ user.code }})</em>
+                        {% endif %}
+                    </p>
+                {% endif %}
+            </div>
+            <div class="v_main_header__right v_element">
+                <button class="v_btn v_element">
+                    <a href="/users/sign_up" class="v_a v_element">Đăng ký</a>
+                </button>
+                {% if user.id %}
+                    <button class="v_btn v_element">
+                        <a href="/users/logout" class="v_a v_element">Đăng xuất</a>
+                    </button>
+                {% else %}
+                    <button class="v_btn v_element">
+                        <a href="/users/login" class="v_a v_element">Đăng nhập</a>
+                    </button>
+                {% endif %}
+            </div>
+        </header>
+        <nav class="v_main_nav v_element">
+            <ul class="v_ul v_element">
+                <li class="v_li {% if type and type != 2 and type != 3 %}v_selected{% endif %} v_element">
+                    <a href="/exams/exams?type=1" class="v_a v_pointer v_element">Đề có thể làm</a>
+                </li>
+                {% if user.id %}
+                    <li class="v_li {% if type and type == 2 %}v_selected{% endif %} v_element">
+                        <a href="/exams/exams?type=2" class="v_a v_pointer v_element">Đề đã làm</a>
+                    </li>
+                    <li class="v_li {% if type and type == 3 %}v_selected{% endif %} v_element">
+                        <a href="/exams/exams?type=3" class="v_a v_pointer v_element">Đề bản thân đã tạo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <div class="v_main_layout-down v_element">
+        <main class="v_main_main v_element">
+            <section class="v_section v_element">
+                <form method="post" action="/exams/exam/" class="v_form v_element">
+                    {% csrf_token %}
+
+                    {% if exam_id %}
+                        <input type="hidden" name="exam_id" value="{{ exam_id }}"/>
+                    {% endif %}
+
+                    <div class="v_exam_header v_element">
+                        <div class="v_element" style="display: flex; flex-flow: column; gap: 8px;">
+                            <div>
+                                <label for="name">Tiêu đề:</label>
+                                <input name="name" id="name" class="v_input v_element" style="width: 300px;" value="{{exam_name}}"/>
+                            </div>
+
+                            <div>
+                                <label for="time">Thời gian làm:</label>
+                                <input name="time" id="time" type="text" class="v_input v_element" style="width:calc(3.5rem + 16px);" value="{{exam_time}}"/>
+                                (<em class="v_em v_element">Thời gian theo định dạng hh:mm:ss và không lớn hơn 24:00:00</em>)
+                            </div>
+
+                            <script>
+                                time_input = document.getElementById('time');
+                                time_input.addEventListener("focus", () => time_input.value = '');
+                                time_input.addEventListener("keydown", function (e) {
+                                    if (e.code === 'Backspace' || e.code === 'Delete') return;
+                                    if (e.code.startsWith('Digit')) {
+                                        const code = e.code[5];
+                                        const time_input_value = time_input.value.replaceAll(':', '');
+
+                                        switch (time_input_value.length) {
+                                            case 0: {
+                                                if ("012".includes(code)) return;
+                                                break;
+                                            }
+                                            case 1: {
+                                                if ("01".includes(time_input_value)) return
+                                                if ("01234".includes(code)) return;
+                                                break;
+                                            }
+                                            case 2: {
+                                                 if (time_input_value === "24") {
+                                                     if (code === "0") return;
+                                                     break;
+                                                 }
+                                                 if ("012345".includes(code)) return;
+                                                 break;
+                                            }
+                                            case 3: {
+                                                if (time_input_value === "240") {
+                                                    if (code === "0") return;
+                                                    break;
+                                                }
+                                                return;
+                                            }
+                                            case 4: {
+                                                if (time_input_value === "2400") {
+                                                     if (code === "0") return;
+                                                     break;
+                                                }
+                                                if ("012345".includes(code)) return;
+                                                break;
+                                            }
+                                            case 5: {
+                                                if (time_input_value === "24000") {
+                                                    if (code === "0") return;
+                                                    break;
+                                                }
+                                                return;
+                                            }
+                                        }
+                                    }
+                                    e.preventDefault();
+                                });
+                                time_input.addEventListener("keyup", function () {
+                                    const time_input_value = time_input.value.replaceAll(':', '')
+                                    if (time_input_value.length > 4) {
+                                        time_input.value = `${time_input_value.substring(0, 2)}:${time_input_value.substring(2, 4)}:${time_input_value.substring(4)}`;
+                                    }
+                                    else if (time_input_value.length > 2) {
+                                        time_input.value = `${time_input_value.substring(0, 2)}:${time_input_value.substring(2)}`;
+                                    }
+                                });
+                            </script>
+                        </div>
+
+                        <div class="v_buttons v_element">
+                            <button id="adding_questions" type="button" class="v_btn v_element">Thêm câu</button>
+                            <button type="submit" class="v_btn v_exam_submit v_element">Lưu</button>
+                        </div>
+                    </div>
+
+                    <input id="number_of_questions" name="number_of_questions"
+                           type="hidden"
+                           value="{% if exam_number_of_quizzes %}{{exam_number_of_quizzes}}{% else %}0{% endif %}"/>
+
+                    <div id="questions" class="v_quiz_list v_element">
+                        {% if quizzes %}
+                            {% for quiz in quizzes reversed %}
+                                <div class="v_quiz_list-item v_element" data-order_question={{ quiz.index }}>
+                                    <label for="question_{{ quiz.index }}"
+                                           class="v_label v_element">
+                                        Câu {{ quiz.index }}:
+                                    </label>
+                                    <textarea id="question_{{ quiz.index }}" name="question_{{ quiz.index }}"
+                                              class="v_textarea v_element">{{ quiz.question }}</textarea>
+
+                                    <ul class="v_ul v_element" id="optional_answer_{{ quiz.index }}">
+                                        {% for option in quiz.options %}
+                                            <li class="v_li v_element">
+                                                <label for="option_{{ quiz.index }}_{{ forloop.counter }}"
+                                                       class="v_label v_element">
+                                                    Lựa chọn {{ forloop.counter }}:
+                                                </label>
+                                                <textarea id="option_{{ quiz.index }}_{{ forloop.counter }}"
+                                                          name="option_{{ quiz.index }}_{{ forloop.counter }}"
+                                                          class="v_textarea v_element">{{ option }}</textarea>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <div class="v_element">
+                                        <button name="adding_options_{{ quiz.index }}" type="button"
+                                                class="v_btn v_adding_options v_element">
+                                            Thêm lựa chọn
+                                        </button>
+
+                                        <input id="number_of_options_{{ quiz.index }}"
+                                               name="number_of_options_{{ quiz.index }}"
+                                               type="hidden"
+                                               value="{{ quiz.number_of_options }}"/>
+
+                                        <div class="v_li v_correct_answer v_element">
+                                            <label for="correct_answer_{{ quiz.index }}" class="v_label v_element">
+                                                Trả lời đúng là lựa chọn thứ:
+                                            </label>
+                                            <input id="correct_answer_{{ quiz.index }}"
+                                                   name="correct_answer_{{ quiz.index }}"
+                                                   type="number" step="1" min="1" max="{{ quiz.number_of_options }}"
+                                                   class="v_number v_element" style="width: calc(1rem + 32px)"
+                                                   value="{{ quiz.correct_answer }}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <script>
+                        input_number_of_questions = document.getElementById('number_of_questions');
+                        btn_adding_questions = document.getElementById('adding_questions');
+                        div_questions = document.getElementById('questions');
+                        btn_adding_questions.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            fun1()
+                        });
+                        function fun1() {
+                            input_number_of_questions.value = Number.parseInt(input_number_of_questions.value) + 1;
+
+                            const new_div_question = document.createElement('div');
+                            new_div_question.setAttribute('data-order_question', input_number_of_questions.value);
+                            new_div_question.setAttribute('class', 'v_quiz_list-item v_element');
+
+                            const new_textarea_question = document.createElement('textarea');
+                            new_textarea_question.setAttribute('name', `question_${input_number_of_questions.value}`);
+                            new_textarea_question.setAttribute('id', `question_${input_number_of_questions.value}`);
+                            new_textarea_question.setAttribute('class', "v_textarea v_element");
+
+                            const new_label_question = document.createElement('label');
+                            new_label_question.setAttribute('for', `question_${input_number_of_questions.value}`);
+                            new_label_question.setAttribute('class', "v_label v_element");
+                            new_label_question.innerText = `Câu ${input_number_of_questions.value}:`
+
+                            new_div_question.appendChild(new_label_question);
+                            new_div_question.appendChild(new_textarea_question);
+
+                            const new_ul_optional_answer = document.createElement('ul');
+                            new_ul_optional_answer.setAttribute('id', `optional_answer_${input_number_of_questions.value}`);
+                            new_ul_optional_answer.setAttribute('class', "v_ul v_element");
+
+                            const new_li_1 = document.createElement('li');
+                            new_li_1.setAttribute('class', "v_li v_element");
+
+                            const new_textarea_option_1 = document.createElement('textarea');
+                            new_textarea_option_1.setAttribute('name', `option_${input_number_of_questions.value}_1`);
+                            new_textarea_option_1.setAttribute('id', `option_${input_number_of_questions.value}_1`);
+                            new_textarea_option_1.setAttribute('class', "v_textarea v_element");
+
+                            const new_label_option_1 = document.createElement('label');
+                            new_label_option_1.setAttribute('for', `option_${input_number_of_questions.value}_1`);
+                            new_label_option_1.setAttribute('class', "v_label v_element");
+                            new_label_option_1.innerText = "Lựa chọn 1:";
+
+                            new_li_1.appendChild(new_label_option_1);
+                            new_li_1.appendChild(new_textarea_option_1);
+
+                            const new_li_2 = document.createElement('li');
+                            new_li_2.setAttribute('class', "v_li v_element");
+
+                            const new_textarea_option_2 = document.createElement('textarea');
+                            new_textarea_option_2.setAttribute('name', `option_${input_number_of_questions.value}_2`);
+                            new_textarea_option_2.setAttribute('id', `option_${input_number_of_questions.value}_2`);
+                            new_textarea_option_2.setAttribute('class', "v_textarea v_element");
+
+                            const new_label_option_2 = document.createElement('label');
+                            new_label_option_2.setAttribute('for', `option_${input_number_of_questions.value}_2`);
+                            new_label_option_2.setAttribute('class', "v_label v_element");
+                            new_label_option_2.innerText = "Lựa chọn 2:";
+
+                            new_li_2.appendChild(new_label_option_2);
+                            new_li_2.appendChild(new_textarea_option_2);
+
+                            new_ul_optional_answer.appendChild(new_li_1);
+                            new_ul_optional_answer.appendChild(new_li_2);
+
+                            new_div_question.appendChild(new_ul_optional_answer);
+
+                            const new_div_correct_answer_and_adding_options = document.createElement('div');
+                            new_div_correct_answer_and_adding_options.setAttribute('class', "v_element");
+
+                            const new_button_adding_options = document.createElement('button');
+                            new_button_adding_options.setAttribute('id', `adding_options_${input_number_of_questions.value}`);
+                            new_button_adding_options.setAttribute('class', "v_btn v_ v_element");
+                            new_button_adding_options.setAttribute('type', "button");
+                            new_button_adding_options.innerText = "Thêm lựa chọn";
+
+                            new_div_correct_answer_and_adding_options.appendChild(new_button_adding_options);
+
+                            const new_input_number_of_options = document.createElement('input');
+                            new_input_number_of_options.setAttribute('name', `number_of_options_${input_number_of_questions.value}`);
+                            new_input_number_of_options.setAttribute('id', `number_of_options_${input_number_of_questions.value}`);
+                            new_input_number_of_options.setAttribute('type', "hidden");
+                            new_input_number_of_options.value = "2";
+
+                            new_div_correct_answer_and_adding_options.appendChild(new_input_number_of_options);
+
+                            const new_div_correct_answer = document.createElement('div');
+                            new_div_correct_answer.setAttribute('class', "v_div v_correct_answer v_element");
+
+                            const new_input_correct_answer = document.createElement('input');
+                            new_input_correct_answer.setAttribute('name', `correct_answer_${input_number_of_questions.value}`);
+                            new_input_correct_answer.setAttribute('id', `correct_answer_${input_number_of_questions.value}`);
+                            new_input_correct_answer.setAttribute('class', "v_number v_element");
+                            new_input_correct_answer.setAttribute('type', "number");
+                            new_input_correct_answer.setAttribute('step', "1");
+                            new_input_correct_answer.setAttribute('min', "1");
+                            new_input_correct_answer.setAttribute('max', "2");
+
+                            const new_label_correct_answer = document.createElement('label');
+                            new_label_correct_answer.setAttribute('for', `correct_answer_${input_number_of_questions.value}`);
+                            new_label_correct_answer.setAttribute('class', "v_label v_element");
+                            new_label_correct_answer.innerText = "Trả lời đúng là lựa chọn thứ:";
+
+                            new_div_correct_answer.appendChild(new_label_correct_answer);
+                            new_div_correct_answer.appendChild(new_input_correct_answer);
+
+                            new_div_correct_answer_and_adding_options.appendChild(new_div_correct_answer);
+
+                            new_div_question.appendChild(new_div_correct_answer_and_adding_options);
+
+                            div_questions.prepend(new_div_question);
+
+                            document.getElementById(`adding_options_${input_number_of_questions.value}`).addEventListener('click', function (event) {
+                                event.preventDefault();
+                                fun2(event);
+                            })
+                        }
+                        function fun2(event) {
+                            const order_of_question = event.target.id.replace('adding_options_','');
+
+                            const number_of_option = document.getElementById(`number_of_options_${order_of_question}`);
+                            number_of_option.value = Number.parseInt(number_of_option.value) + 1;
+
+                            const input_correct_answer = document.getElementById(`correct_answer_${order_of_question}`)
+                            input_correct_answer.setAttribute('max', `${number_of_option.value}`)
+
+                            const ul_optional_answer = document.getElementById(`optional_answer_${order_of_question}`);
+
+                            const new_li = document.createElement('li');
+                            new_li.setAttribute('class', "v_li v_element");
+
+                            const new_textarea_option = document.createElement('textarea');
+                            new_textarea_option.setAttribute('name', `option_${order_of_question}_${number_of_option.value}`);
+                            new_textarea_option.setAttribute('id', `option_${order_of_question}_${number_of_option.value}`);
+                            new_textarea_option.setAttribute('class', "v_textarea v_element");
+
+                            const new_label_option = document.createElement('label');
+                            new_label_option.setAttribute('for', `option_${order_of_question}_${number_of_option.value}`);
+                            new_label_option.setAttribute('class', "v_label v_element");
+                            new_label_option.innerText = `Lựa chọn ${number_of_option.value}:`;
+
+                            new_li.appendChild(new_label_option);
+                            new_li.appendChild(new_textarea_option);
+
+                            ul_optional_answer.appendChild(new_li);
+
+                            if (number_of_option.value >= 5) {
+                                event.target.style.display = 'none';
+                            }
+                        }
+
+                        document.getElementById("adding_options_{{quiz.index}}").addEventListener('click', function (event) {
+                            event.preventDefault();
+                            fun2(event);
+                        });
+                    </script>
+                </form>
+            </section>
+            <aside class="v_sidebar v_element">
+                {% if error_messages %}
+                {% for error_message in error_messages %}
+                <p class="v_p v_count_done v_element">{{ error_message }}</p>
+                {% endfor %}
+                {% endif %}
+            </aside>
+        </main>
+        {#<footer class="v_main_footer v_element"></footer>#}
+    </div>
+</div>
+
+</body>
+</html>

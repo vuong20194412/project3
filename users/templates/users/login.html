@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi-vn" dir="ltr" class="v_element">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        :root {
+            --theme-color: #FA6469BF;
+            --part-color: #A9A9A9FF;
+            --part-border-color: #FA646933;
+        }
+        .v_element, .v_element::before, .v_element::after {
+            box-sizing: border-box;
+        }
+
+        /*-----layer 1----*/
+        html {
+            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: #00000000;
+        }
+
+        /*-----layer 2----*/
+        body {
+            font-size: calc(13.0rem / 12.0);
+            font-weight: 400;
+            margin: 0;
+            font-family: serif;
+        }
+        .v_btn {
+            border: 0;
+            outline: 0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            text-align: center;
+        }
+        .v_btn:hover {
+            opacity: 0.6;
+        }
+        .v_btn:active {
+            opacity: 0.9;
+        }
+        .v_a {
+            text-decoration: none;
+            background-color: transparent;
+        }
+        .v_btn {
+            background-color: var(--theme-color);
+            color: #ffffff;
+            min-width: 80px;
+            width: fit-content;
+            min-height: 36px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .v_btn > .v_a {
+            text-decoration: unset;
+            color: inherit;
+        }
+        input {
+            padding: 4px 8px;
+            border-radius: 4px;
+            min-height: 28px;
+        }
+    </style>
+</head>
+<body style="
+    display: flex;
+    padding: 0;
+    justify-content: center;
+">
+    <div style="
+    width: fit-content;
+    height: 50vh;
+    min-width: 25%;
+    transform: translateY(50%);
+    background: var(--part-color);
+    border: 1px black solid;
+    border-radius: 4px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    gap: 4px;
+">
+    <h2 style="align-self: center;">ĐĂNG NHẬP</h2>
+    <form method="post" style="
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+">
+        {% csrf_token %}
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <button class="v_btn" type="submit" style="min-width: 140px;align-self: center;margin-top:8px;">Đăng nhập</button>
+    </form>
+    <button type="button" class="v_btn" style="min-width: 140px;align-self: center;margin-top:8px;">
+    <a href="/users/sign_up" class="v_a">Tới trang đăng ký</a>
+    </button>
+</div>
+</body>
+</html>

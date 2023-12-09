@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="vi-vn" dir="ltr" class="v_element">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Exam {{ exam.id }}</title>
+    <style>
+        /*-----layer 0----*/
+        :root {
+            --theme-color: #FA6469BF;
+            --part-color: #A9A9A9FF;
+            --part-border-color: #FA646933;
+        }
+
+        .v_element, .v_element::before, .v_element::after {
+            box-sizing: border-box;
+        }
+
+        /*-----layer 1----*/
+        html {
+            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: #00000000;
+        }
+
+        /*-----layer 2----*/
+        body {
+            font-size: calc(13.0rem / 12.0);
+            font-weight: 400;
+            margin: 0;
+            font-family: serif;
+        }
+
+        /*-----tag--------*/
+        .v_btn {
+            border: 0;
+            outline: 0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            text-align: center;
+        }
+
+        .v_btn:hover {
+            opacity: 0.6;
+        }
+
+        .v_btn:active {
+            opacity: 0.9;
+        }
+
+        .v_li {
+            text-align: match-parent;
+            text-align: -webkit-match-parent;
+        }
+
+        .v_ul .v_li {
+            list-style-type: none;
+        }
+
+        .v_a {
+            text-decoration: none;
+            background-color: transparent;
+            color: inherit;
+        }
+
+        .v_pointer {
+            cursor: pointer;
+        }
+
+        .v_ul.v_horizontal .v_li {
+            float: left;
+        }
+    </style>
+    <style>
+        /*-----layer 3----*/
+        .v_main_layout {
+            display: flex;
+            flex-flow: column wrap;
+            gap: 1em;
+            justify-content: space-between;
+            min-height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /*-----layer 4----*/
+        .v_main_layout__top {
+            overflow: hidden;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            background-color: #ffffff;
+            margin-top: 0;
+            height: 100px;
+        }
+
+        .v_main_layout-down {
+            overflow: auto;
+            display: flex;
+            height: auto;
+            flex-flow: column;
+            justify-content: space-between;
+            background-color: #ffffff;
+            margin-top: 0;
+        }
+
+        /*-----layer 5----*/
+        .v_main_header {
+            overflow: hidden;
+            height: 54px;
+            background-color: var(--part-color);
+            display: flex;
+            justify-content: space-between;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .v_main_nav {
+            overflow: hidden;
+            height: 46px;
+            background-color: var(--part-color);
+            border-bottom: 1px inset var(--part-border-color);
+            border-top: 1px inset var(--part-border-color);
+            font-size: 1.1em;
+        }
+
+        .v_main_main {
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-flow: column-reverse;
+            background-color: #00000000;
+            gap: 1em;
+            justify-content: space-between;
+            padding: 8px;
+        }
+
+        .v_main_footer {
+            overflow: hidden;
+            min-height: 24px;
+            border-top: 1px inset var(--part-border-color);
+            background-color: var(--part-color);
+        }
+
+        /*-----layer 6----*/
+        .v_main_header__left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .v_main_header__right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .v_main_nav > .v_ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            align-items: center;
+        }
+
+        .v_main_main > .v_section {
+            overflow: hidden;
+            display: flex;
+            flex-flow: column;
+            min-width: 80vw;
+        }
+
+        .v_main_main > .v_sidebar {
+            overflow: hidden;
+            border: 0;
+            border-left: 1px inset var(--part-border-color);
+            background-color: var(--part-color);
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+            border-radius: 4px;
+        }
+
+        /*-----layer 7----*/
+        .v_main_header__right > .v_btn {
+            background-color: var(--theme-color);
+            color: #ffffff;
+            min-width: 80px;
+            width: fit-content;
+            min-height: 36px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .v_main_header__right > .v_btn > .v_a {
+            text-decoration: unset;
+            color: unset;
+        }
+
+        .v_main_nav > .v_ul > .v_li ~ .v_li {
+            border-left: 1px dotted var(--theme-color);
+        }
+
+        .v_main_nav > .v_ul > .v_li:first-child {
+            border-left: 1px dotted var(--theme-color);
+        }
+
+        .v_main_nav > .v_ul > .v_li:last-child {
+            border-right: 1px dotted var(--theme-color);
+        }
+
+        /*-----layer 8----*/
+        .v_main_nav > .v_ul > .v_li > .v_a {
+            display: block;
+            height: 46px;
+            line-height: 46px;
+            text-align: center;
+            padding-left: 4px;
+            padding-right: 4px;
+            color: #ffffff;
+            min-width: 160px;
+        }
+
+        .v_main_nav > .v_ul > .v_li > .v_a:hover, .v_main_nav > .v_ul > .v_li > .v_a:focus {
+            opacity: 0.6;
+            outline: none;
+        }
+
+        .v_main_nav > .v_ul > .v_li > .v_a:active {
+            opacity: 0.9;
+            outline: none;
+        }
+
+        /*-----special----*/
+        .v_user_name {
+            background-color: #ffffff;
+            border-radius: 0.8em;
+            padding: 8px 4px;
+            transform: translateX(-4px);
+        }
+        .v_exam_header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .v_exam_header > .v_buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .v_exam_header > .v_buttons > .v_btn {
+            font-size: 1.1em;
+            color: #ffffff;
+            background-color: var(--theme-color);
+            height: 36px;
+            min-width: 80px;
+        }
+
+        #adding_questions {
+            height: 36px;
+            min-width: 120px;
+        }
+
+        .v_exam_name {
+            margin: 4px 0;
+            padding: 0;
+        }
+        .v_exam_time {
+            margin: 4px 0;
+            padding: 0;
+        }
+        .v_quiz_list {
+            overflow: auto;
+            height: calc(100vh - 208px);
+            border-top: 2px inset var(--theme-color);
+            border-bottom: 1px inset var(--theme-color);
+            border-left: 1px inset var(--theme-color);
+            border-right: 1px inset var(--theme-color);
+        }
+        .v_quiz_list-item {
+            padding: 4px 8px;
+            display: flex;
+            flex-flow: column;
+            gap: 8px;
+        }
+        .v_quiz_list-item ~ .v_quiz_list-item{
+            border-top: 2px inset black;
+            margin-top: 4px;
+        }
+        .v_quiz_list-item__last {
+            border-bottom: 2px outset black;
+        }
+        .v_quiz_list-item > .v_quiz_question {
+            padding: 4px 8px 0 8px;
+            margin: 0;
+        }
+        .v_quiz_list-item > .v_strong {
+             padding: 0 8px;
+        }
+        .v_quiz_list-item > .v_strong.v_em {
+             font-style: italic;
+        }
+        .v_quiz_list-item > .v_ul {
+            padding-left: 0;
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+        .v_quiz_list-item > .v_ul > .v_li ~ .v_li {
+            margin-top: 8px;
+        }
+        .v_quiz_list-item > .v_ul > .v_li {
+            display: flex;
+            align-items: start;
+            gap: 4px;
+        }
+        .v_quiz_list-item > .v_ul > .v_li > .v_textarea {
+            width: auto;
+        }
+
+        .v_li.v_correct_answer {
+            margin-top: 8px;
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .v_quiz_list-item > .v_btn {
+            width: fit-content;
+            min-width: 80px;
+            align-self: end;
+        }
+        .v_count_done {
+            width: calc(100% - 16px);
+            background-color: white;
+            border-radius: 4px;
+            padding: 4px 8px;
+        }
+        /*----media------*/
+        @media screen (max-width: 900px and min-width: 600px), (min-width: 1100px) {
+            /*----layer 4--------*/
+            .v_main_layout__top {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+            }
+
+            .v_main_layout-down {
+                margin-top: 100px;
+                height: calc(100vh - 100px);
+            }
+             /*----layer 5--------*/
+            .v_main_main {
+                position: relative;
+                flex-flow: row;
+            }
+             /*----layer 6--------*/
+            .v_main_main > .v_sidebar {
+                min-height: 400px;
+                max-width: 20vw;
+                padding: 8px;
+                display: flex;
+                flex-flow: column;
+                gap: 8px;
+                align-items: start;
+                width: -webkit-fill-available;
+                height: -webkit-fill-available;
+            }
+            /*--*/
+            .v_main_main > .v_sidebar > .v_p {
+                margin: 0;
+                padding: 4px 8px;
+            }
+        }
+        input {
+            padding: 4px 8px;
+            border-radius: 4px;
+            min-height: 28px;
+        }
+    </style>
+</head>
+<body class="v_element">
+<div class="v_main_layout v_element">
+    <div class="v_main_layout__top v_element">
+        <header class="v_main_header v_element">
+            <div class="v_main_header__left v_element">
+                {% if user.name and user.code %}
+                    <p class="v_p v_user_name v_element">
+                        <strong>{{ user.name }}</strong>
+                        {% if user.code %}
+                            <em class="v_em v_element">({{ user.code }})</em>
+                        {% endif %}
+                    </p>
+                {% endif %}
+            </div>
+            <div class="v_main_header__right v_element">
+                <button class="v_btn v_element">
+                    <a href="/users/sign_up" class="v_a v_element">Đăng ký</a>
+                </button>
+                {% if user.id %}
+                    <button class="v_btn v_element">
+                        <a href="/users/logout" class="v_a v_element">Đăng xuất</a>
+                    </button>
+                {% else %}
+                    <button class="v_btn v_element">
+                        <a href="/users/login" class="v_a v_element">Đăng nhập</a>
+                    </button>
+                {% endif %}
+            </div>
+        </header>
+        <nav class="v_main_nav v_element">
+            <ul class="v_ul v_element">
+                <li class="v_li {% if type and type != 2 and type != 3 %}v_selected{% endif %} v_element">
+                    <a href="/exams/exams?type=1" class="v_a v_pointer v_element">Đề có thể làm</a>
+                </li>
+                {% if user.id %}
+                    <li class="v_li {% if type and type == 2 %}v_selected{% endif %} v_element">
+                        <a href="/exams/exams?type=2" class="v_a v_pointer v_element">Đề đã làm</a>
+                    </li>
+                    <li class="v_li {% if type and type == 3 %}v_selected{% endif %} v_element">
+                        <a href="/exams/exams?type=3" class="v_a v_pointer v_element">Đề bản thân đã tạo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <div class="v_main_layout-down v_element">
+        <main class="v_main_main v_element">
+            <section class="v_section v_element">
+                <form id="test_form" method="post" action="/exams/test/" class="v_form v_element">
+                    {% csrf_token %}
+
+                    {% if exam_id %}
+                        <input type="hidden" name="exam_id" value="{{ exam_id }}"/>
+                    {% endif %}
+
+                    <div class="v_exam_header v_element">
+                        <div class="v_element">
+                            <div class="v_element" style="display: flex; align-items: center; gap: 4px;">
+                                <label class="v_label v_element" style="font-weight: bold;">Đề:</label>
+                                <p id="name" class="v_p v_exam_name v_element">{{exam_name}} (<em>{{exam_code}}</em>)</p>
+                            </div>
+                            <div class="v_element" style="display: flex; align-items: center; gap: 4px;">
+                                <label class="v_label v_element">Thời gian còn:</label>
+                                <p id="time" class="v_p v_exam_time v_element" style="font-weight:bold;">{{exam_time}}</p>
+                            </div>
+                        </div>
+
+                        <div class="v_buttons v_element">
+                            <button id="submit_button" type="button" class="v_btn v_exam_submit v_pointer v_element">Nộp bài</button>
+                        </div>
+                    </div>
+
+                    <div id="questions" class="v_quiz_list v_element">
+                        {% if quizzes %}
+                            {% for quiz in quizzes %}
+                                <div class="v_quiz_list-item {% if forloop.last %}v_quiz_list-item__last{% endif %} v_element" data-order_question={{ quiz.index }}>
+                                    <p id="question_{{ quiz.index }}" class="v_p v_quiz_question v_element">
+                                        <strong class="v_strong v_element">
+                                            Câu {{ quiz.index }}:
+                                        </strong>
+                                        {{ quiz.question }}
+                                    </p>
+
+                                    <strong class="v_strong v_em v_element">
+                                        Chọn 1 đáp án trong các lựa chọn sau:
+                                    </strong>
+
+                                    <ul class="v_ul v_element" id="optional_answer_{{ quiz.index }}">
+                                        {% for option in quiz.options %}
+                                            <li class="v_li v_element" style="align-items: center;margin-left:8px;">
+                                                <input id="option_{{ quiz.index }}_{{ forloop.counter }}"
+                                                       name="answer_{{ quiz.index }}"
+                                                       {% if quiz.answer == forloop.counter %}checked{% endif %}
+                                                       type="radio"
+                                                       class="v_radio v_element" style="transform: scale(1.25) translateY(-2px)"
+                                                       value="{{ forloop.counter }}"/>
+                                                <label for="option_{{ quiz.index }}_{{ forloop.counter }}"
+                                                       class="v_label v_element">
+                                                    {{ option }}
+                                                </label>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </form>
+            </section>
+            <aside class="v_sidebar v_element">
+                <p class="v_p v_count_done v_element">
+                    Đã làm
+                    <em id="number_did_em" class="v_em v_element">0</em>
+                    câu.
+                </p>
+                <p class="v_p v_count_done v_element">
+                    Còn
+                    <em id="number_non_done_em" class="v_em v_element">{{ exam_number_of_quizzes }}</em>
+                    câu chưa làm.
+                </p>
+            </aside>
+            <script>
+                time_p = document.getElementById('time');
+                number_did_em = document.getElementById('number_did_em');
+                number_non_done_em = document.getElementById('number_non_done_em');
+                radio_inputs = document.querySelectorAll('#questions > .v_quiz_list-item > .v_ul > .v_li > input[type=radio]')
+
+                function get_number_of_checked_radios() {
+                    let number_of_checked = 0;
+                    for (let i = 0; i < radio_inputs.length; i++) {
+                        if (radio_inputs[i].checked) {
+                            number_of_checked += 1;
+                        }
+                    }
+                    return number_of_checked;
+                }
+
+                const interval = setInterval(() => {
+                    const number_of_checked_radios = get_number_of_checked_radios();
+                    number_did_em.innerText = number_of_checked_radios.toString();
+                    number_non_done_em.innerText = (Number.parseInt({{ exam_number_of_quizzes }}) - number_of_checked_radios).toString();
+
+                    const time_p_value = time_p.innerText.split(":")
+                    const hours = Number.parseInt(time_p_value[0]);
+                    const minutes = Number.parseInt(time_p_value[1]);
+                    const seconds =  Number.parseInt(time_p_value[2]);
+                    if (seconds > 0) {
+                        time_p.innerText = `${time_p_value[0]}:${time_p_value[1]}:${seconds > 10 ? seconds - 1 : '0' + (seconds - 1).toString()}`
+                    }
+                    else if (minutes > 0) {
+                        time_p.innerText = `${time_p_value[0]}:${minutes > 10 ? minutes -1 : '0' + (minutes - 1).toString()}:59`
+                    }
+                    else if (hours > 0) {
+                        time_p.innerText = `${hours > 10 ? hours - 1 : '0' + (hours - 1).toString()}:59:59`
+                    }
+                    else {
+                        clearInterval(interval);
+                        document.getElementById('test_form').submit();
+                    }
+                }, 1000);
+
+                document.getElementById('submit_button').addEventListener('click', function (event) {
+                    event.stopImmediatePropagation();
+                    event.stopPropagation();
+                    clearInterval(interval);
+                    document.getElementById('test_form').submit();
+                })
+            </script>
+        </main>
+        {#<footer class="v_main_footer v_element"></footer>#}
+    </div>
+</div>
+
+</body>
+</html>

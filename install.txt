@@ -1,0 +1,74 @@
+#python 3.9.13
+
+python -V
+
+python -m pip -V
+
+python -m pip install --upgrade pip
+
+python -m venv django_projects
+
+django_projects\Scripts\activate
+
+cd django_projects
+...\django_projects> python -m pip install django==4.1.2
+
+...\django_projects> django-admin --version
+
+#Django Create Project (django-admin startproject <project_name>)
+...\django_projects> django-admin startproject project3
+
+#(cd <project_name>)
+...\django_projects> cd project3
+
+#Run server
+...\django_projects\project3> python manage.py runserver
+
+#Django Create App (python3 manage.py startapp <app_name>)
+...\django_projects\project3> python manage.py startapp exams
+
+#(touch <app_name>/urls.py)
+...\django_projects\project3> type nul > exams/urls.py 
+
+#(mkdir <app_name>/templates/<app_name>)
+...\django_project\project3> mkdir exams\templates\exams
+
+
+NEED CREATE CUSTOM USER MODEL BEFORE migrate
+
+...\django_projects\project3> python manage.py startapp users
+
+Chỉnh thế này trong file ...\django_projects\project3\settings.py
+
+# ---------------------------------------------------
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'users',
+    'exams',
+]
+
+AUTH_USER_MODEL = 'users.User'
+# ---------------------------------------------------
+
+Tạo class User, UserManager trong users\models.py
+
+...\django_projects\project3> type nul > users/urls.py
+...\django_project\project3> mkdir users\templates\users
+
+...\django_projects\project3> python manage.py makemigrations users
+...\django_projects\project3> python manage.py migrate
+
+...\django_projects\project3> python manage.py createsuperuser
+
+Tạo class Exam, Test trong exams\models.py
+...\django_projects\project3> python manage.py makemigrations exams
+...\django_projects\project3> python manage.py migrate
+
+...\django_projects\project3> ..\Scripts\activate
+...\django_projects\project3> ..\Scripts\deactivate
+...\django_projects\project3> python manage.py runserver

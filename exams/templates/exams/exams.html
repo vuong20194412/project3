@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="vi-vn" dir="ltr" class="v_element">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Exams</title>
+    <style>
+        /*-----layer 0----*/
+        :root {
+            --theme-color: #FA6469BF;
+            --part-color: #A9A9A9FF;
+            --part-border-color: #FA646933;
+        }
+
+        .v_element, .v_element::before, .v_element::after {
+            box-sizing: border-box;
+        }
+
+        /*-----layer 1----*/
+        html {
+            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: #00000000;
+        }
+
+        /*-----layer 2----*/
+        body {
+            font-size: calc(13.0rem / 12.0);
+            font-weight: 400;
+            margin: 0;
+            font-family: serif;
+        }
+
+        /*-----tag--------*/
+        .v_btn {
+            border: 0;
+            outline: 0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            text-align: center;
+        }
+
+        .v_btn:hover {
+            opacity: 0.6;
+        }
+
+        .v_btn:active {
+            opacity: 0.9;
+        }
+
+        .v_li {
+            text-align: match-parent;
+            text-align: -webkit-match-parent;
+        }
+
+        .v_ul .v_li {
+            list-style-type: none;
+        }
+
+        .v_a {
+            text-decoration: none;
+            background-color: transparent;
+            color: inherit;
+        }
+
+        .v_pointer {
+            cursor: pointer;
+        }
+
+        .v_ul.v_horizontal .v_li {
+            float: left;
+        }
+    </style>
+    <style>
+        /*-----layer 3----*/
+        .v_main_layout {
+            overflow: hidden;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            gap: 1em;
+            min-height: 100%;
+            position: relative;
+        }
+
+        /*-----layer 4----*/
+        .v_main_layout__top {
+            overflow: hidden;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            background-color: #ffffff;
+            margin-top: 0;
+            height: 100px;
+        }
+
+        .v_main_layout-down {
+            overflow: auto;
+            display: flex;
+            height: auto;
+            flex-flow: column;
+            justify-content: space-between;
+            background-color: #ffffff;
+            margin-top: 0;
+        }
+
+        /*-----layer 5----*/
+        .v_main_header {
+            overflow: hidden;
+            height: 54px;
+            background-color: var(--part-color);
+            display: flex;
+            justify-content: space-between;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .v_main_nav {
+            overflow: hidden;
+            height: 46px;
+            background-color: var(--part-color);
+            border-bottom: 1px inset var(--part-border-color);
+            border-top: 1px inset var(--part-border-color);
+            font-size: 1.1em;
+        }
+
+        .v_main_main {
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-flow: column-reverse;
+            background-color: #00000000;
+            gap: 1em;
+            justify-content: space-between;
+            padding: 8px;
+        }
+
+        .v_main_footer {
+            overflow: hidden;
+            min-height: 24px;
+            border-top: 1px inset var(--part-border-color);
+            background-color: var(--part-color);
+        }
+
+        /*-----layer 6----*/
+        .v_main_header__left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .v_main_header__right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .v_main_nav > .v_ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            align-items: center;
+        }
+
+        .v_main_main > .v_section {
+            overflow: hidden;
+            display: flex;
+            flex-flow: column;
+            min-width: 80vw;
+        }
+
+        .v_main_main > .v_sidebar {
+            overflow: hidden;
+            border: 0;
+            border-left: 1px inset var(--part-border-color);
+            background-color: var(--part-color);
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+            border-radius: 4px;
+        }
+
+        /*-----layer 7----*/
+
+        .v_main_header__right > .v_btn {
+            background-color: var(--theme-color);
+            color: #ffffff;
+            min-width: 80px;
+            width: fit-content;
+            min-height: 36px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .v_main_header__right > .v_btn > .v_a {
+            text-decoration: unset;
+            color: unset;
+        }
+
+        .v_main_nav > .v_ul > .v_li.v_selected {
+            background-color: bisque;
+        }
+
+        .v_main_nav > .v_ul > .v_li.v_selected > .v_a {
+            color: var(--theme-color);
+        }
+
+        .v_main_nav > .v_ul > .v_li ~ .v_li {
+            border-left: 1px dotted var(--theme-color);
+        }
+
+        .v_main_nav > .v_ul > .v_li:first-child {
+            border-left: 1px dotted var(--theme-color);
+        }
+
+        .v_main_nav > .v_ul > .v_li:last-child {
+            border-right: 1px dotted var(--theme-color);
+        }
+
+        /*-----layer 8----*/
+        .v_main_nav > .v_ul > .v_li > .v_a {
+            display: block;
+            height: 46px;
+            line-height: 46px;
+            text-align: center;
+            padding-left: 4px;
+            padding-right: 4px;
+            color: #ffffff;
+            min-width: 160px;
+        }
+
+        .v_main_nav > .v_ul > .v_li > .v_a:hover, .v_main_nav > .v_ul > .v_li > .v_a:focus {
+            opacity: 0.6;
+            outline: none;
+        }
+
+        .v_main_nav > .v_ul > .v_li > .v_a:active {
+            opacity: 0.9;
+            outline: none;
+        }
+
+        /*-----special----*/
+        .v_user_name {
+            background-color: #ffffff;
+            border-radius: 0.8em;
+            padding: 8px 4px;
+            transform: translateX(-4px);
+        }
+
+        .v_count_done {
+            width: calc(100% - 16px);
+            background-color: white;
+            border-radius: 4px;
+            padding: 4px 8px;
+        }
+
+        .v_exams_header {
+            overflow: hidden;
+            display: flex;
+            height: 60px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .v_exams_header > .v_btn {
+            height: 48px;
+            color: #fff;
+            background-color: var(--theme-color);
+            font-size: 1.1em;
+        }
+
+        .v_exams_kanban {
+            overflow-y: auto;
+            height: calc(100% - 100px);
+            border-top: 2px inset var(--theme-color);
+            border-bottom: 1px inset var(--theme-color);
+            border-left: 1px inset var(--theme-color);
+            border-right: 1px inset var(--theme-color);
+            display: grid;
+            grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+            column-gap: 16px;
+            row-gap: 8px;
+            padding: 8px 16px;
+        }
+
+        .v_exams_kanban__item {
+            padding: 8px;
+            border: 1px inset var(--part-border-color);
+            border-radius: 4px;
+        }
+
+        .v_exams_kanban__item > .v_exams_row_buttons {
+            display: flex;
+            gap: 4px;
+            float: right;
+        }
+
+        .v_exams_kanban__item > .v_exams_row_buttons > .v_btn {
+            color: #fff;
+            background-color: var(--theme-color);
+            min-height: 36px;
+            min-width: 72px;
+        }
+
+        .v_exams_nav {
+            overflow: hidden;
+            display: flex;
+            height: 40px;
+            align-items: center;
+            gap: 4px;
+            padding-top: 4px;
+        }
+
+        .v_exams_nav > .v_input_number {
+            width: calc(2em + 8px);
+            padding: 4px 8px;
+            text-align: center;
+            height: 36px;
+            border-radius: 4px;
+            outline: 0;
+            border: 1px inset var(--theme-color);
+        }
+
+        .v_exams_nav > .v_input_number::-webkit-inner-spin-button,
+        .v_exams_nav > .v_input_number::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .v_exams_nav > .v_input_number {
+            -moz-appearance:textfield;
+        }
+
+        .v_exams_nav > .v_input_number:focus {
+            outline: 1px inset var(--theme-color);
+        }
+
+        .v_exams_nav > .v_btn {
+            background-color: var(--theme-color);
+            color: #ffffff;
+            width: fit-content;
+            height: 36px;
+            text-align: center;
+        }
+
+        .v_exams_nav > .v_ul {
+            padding: 0;
+        }
+
+        .v_exams_nav > .v_ul > .v_li > .v_a {
+            display: block;
+            height: 36px;
+            line-height: 36px;
+            background-color: var(--part-color);
+            border-radius: 4px;
+            text-align: center;
+            min-width: 2em;
+        }
+
+        .v_exams_nav > .v_ul > .v_li ~ .v_li {
+            margin-left: 4px;
+        }
+
+        .v_exams_nav > .v_ul > .v_li > .v_a:hover {
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        .v_exams_nav > .v_ul > .v_li > .v_a:active {
+            color: #fff;
+            opacity: 0.6;
+        }
+
+        .v_exams_nav > .v_ul > .v_li.v_selected > .v_a {
+            background-color: bisque;
+            color: var(--theme-color);
+            border: 1px var(--part-color) solid;
+            border-radius: 4px;
+        }
+
+        .v_exams_nav > .v_ul > .v_li.v_selected > .v_a:hover {
+            background-color: var(--part-color);
+            color: #fff;
+            border:0;
+            opacity: 0.8;
+        }
+
+        .v_exams_nav > .v_ul > .v_li.v_selected > .v_a:active {
+            background-color: var(--part-color);
+            color: #fff;
+            border:0;
+            opacity: 0.6;
+        }
+
+        /*----media------*/
+        @media screen (max-width:900px and min-width:600px), (min-width:1100px) {
+            /*----layer 4--------*/
+            .v_main_layout__top {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+            }
+
+            .v_main_layout-down {
+                margin-top: 100px;
+                height: calc(100vh - 100px);
+            }
+             /*----layer 5--------*/
+            .v_main_main {
+                position: relative;
+                flex-flow: row;
+            }
+             /*----layer 6--------*/
+            .v_main_main > .v_sidebar {
+                min-height: 400px;
+                max-width: 20vw;
+                padding: 8px;
+                display: flex;
+                flex-flow: column;
+                gap: 8px;
+                align-items: start;
+                width: -webkit-fill-available;
+                height: -webkit-fill-available;
+            }
+            /*--*/
+            .v_main_main > .v_sidebar > .v_p {
+                margin: 0;
+                padding: 4px 8px;
+                min-height: 32px;
+                line-height: 24px;
+            }
+        }
+        input {
+            padding: 4px 8px;
+            border-radius: 4px;
+            min-height: 28px;
+        }
+    </style>
+</head>
+<body class="v_element">
+<div class="v_main_layout v_element">
+    <div class="v_main_layout__top v_element">
+        <header class="v_main_header v_element">
+            <div class="v_main_header__left v_element">
+                {% if user.name and user.code %}
+                    <p class="v_p v_element v_user_name">
+                        <strong>{{ user.name }}</strong>
+                        {% if user.code %}
+                            <em class="v_em v_element">({{ user.code }})</em>
+                        {% endif %}
+                    </p>
+                {% endif %}
+            </div>
+            <div class="v_main_header__right v_element">
+                <button class="v_btn v_element">
+                    <a href="/users/sign_up" class="v_a v_element">Đăng ký</a>
+                </button>
+                {% if user.id %}
+                    <button class="v_btn v_element">
+                        <a href="/users/logout" class="v_a v_element">Đăng xuất</a>
+                    </button>
+                {% else %}
+                    <button class="v_btn v_element">
+                        <a href="/users/login" class="v_a v_element">Đăng nhập</a>
+                    </button>
+                {% endif %}
+            </div>
+        </header>
+        <nav class="v_main_nav v_element">
+            <ul class="v_ul v_element">
+                <li class="v_li {% if type and type != 2 and type != 3 %}v_selected{% endif %} v_element">
+                    <a href="/exams/exams?type=1" class="v_a v_pointer v_element">Đề có thể làm</a>
+                </li>
+                {% if user.id %}
+                    <li class="v_li {% if type and type == 2 %}v_selected{% endif %} v_element">
+                        <a href="/exams/exams?type=2" class="v_a v_pointer v_element">Đề đã làm</a>
+                    </li>
+                    <li class="v_li {% if type and type == 3 %}v_selected{% endif %} v_element">
+                        <a href="/exams/exams?type=3" class="v_a v_pointer v_element">Đề bản thân đã tạo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <div class="v_main_layout-down v_element">
+        <main class="v_main_main v_element">
+            <section class="v_section v_element">
+                <div class="v_exams_header v_element">
+                    <div class="v_element"></div>
+                    {% if can_create %}
+                    <button type="button" class="v_btn v_element">
+                        <a href="/exams/exam" class="v_a v_element v_pointer">Tạo đề mới</a>
+                    </button>
+                    {% endif %}
+                </div>
+                <div class="v_exams_kanban v_element">
+                    {% for exam in exams %}
+                        <div class="v_exams_kanban__item v_element">
+                            <p>Tiêu đề: {{ exam.name }}</p>
+                            <p>Mã: {{ exam.code }}</p>
+                            <p>Tác giả: {{ exam.author }}</p>
+                            <p>Tạo lúc: {{ exam.created_on }}</p>
+                            <p>Hiển thị từ: {{ exam.begin_on }}</p>
+                            <p>Hiển thị đến: {{ exam.end_on }}</p>
+                            {% if exam.your_score %}
+                                <p>Điểm mà bạn đạt được: {{ exam.your_score }}</p>
+                            {% endif %}
+                            <div class="v_exams_row_buttons v_element">
+                                {% if can_do %}
+                                    <button class="v_btn v_element">
+                                        <a href="/exams/test?exam_id={{ exam.id }}&mode=1" class="v_a v_element">
+                                            Làm bài
+                                        </a>
+                                    </button>
+                                {% endif %}
+                                {% if can_view_last_do %}
+                                    <button class="v_btn v_element">
+                                        <a href="/exams/test?exam_id={{ exam.id }}&mode=2" class="v_a v_element">Xem</a>
+                                    </button>
+                                {% endif %}
+                                {% if can_edit %}
+                                    <button class="v_btn v_element">
+                                        <a href="/exams/exam?exam_id={{ exam.id }}&mode=1" class="v_a v_element">Sửa</a>
+                                    </button>
+                                {% endif %}
+                                {% if can_set_constraints %}
+                                    <button class="v_btn v_element">
+                                        <a href="/exams/exam?exam_id={{ exam.id }}&mode=2" class="v_a v_element">
+                                            Đặt ràng buộc
+                                        </a>
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <nav class="v_exams_nav v_horizontal v_element">
+                    <ul class="v_ul v_horizontal v_element">
+                        <li class="v_li v_element">
+                            <a href="/exams/exams?type={{type}}&page=1" class="v_a v_element">&lt;&lt;</a>
+                        </li>
+                        <li class="v_li v_element">
+                            <a href="/exams/exams?type={{type}}&page={{current_exam_quartet_index}}&direction=-1" class="v_a v_element">&lt;</a>
+                        </li>
+                        {% for i in range_exam_quartet_index %}
+                            <li class="v_li {% if i == current_exam_quartet_index %}v_selected{% endif %} v_element">
+                                <a href="/exams/exams?type={{ type }}&page={{ i }}" class="v_a v_element">{{ i }}</a>
+                            </li>
+                        {% endfor %}
+                        {% if not range_exam_quartet_index %}
+                            <li class="v_li v_selected v_element">
+                                <a href="/exams/exams?type={{ type }}&page=1" class="v_a v_element">1</a>
+                            </li>
+                        {% endif %}
+                        <li class="v_li v_element">
+                            <a href="/exams/exams?type={{type}}&page={{current_exam_quartet_index}}&direction=1" class="v_a v_element">&gt;</a>
+                        </li>
+                        <li class="v_li v_element">
+                            <a href="/exams/exams?type={{type}}&page={{ max_exam_quartet_index }}" class="v_a v_element">&gt;&gt;</a>
+                        </li>
+                    </ul>
+
+                    <label for="v_exams_nav__input_number"></label>
+                    <input id="v_exams_nav__input_number" type="number" value={{ current_exam_quartet_index }} min="1" max={{ max_exam_quartet_index }} step="1" class="v_input_number v_element"/>
+
+                    <button type="button" class="v_btn v_element">
+                        <a id="go_to_number_exam_page_a" href="/exams/exams?type={{ type }}&page={{ current_exam_quartet_index }}" class="v_a v_element">&#11208;</a>
+                    </button>
+
+                    <script>
+                        go_to_number_exam_page_a = document.getElementById('go_to_number_exam_page_a');
+                        document.getElementById('v_exams_nav__input_number').addEventListener('blur', function (event) {
+                            go_to_number_exam_page_a.setAttribute('href', go_to_number_exam_page_a.getAttribute('href').replace(/page=[1-9]+/, "page=" + event.target.value));
+                        });
+                    </script>
+                </nav>
+            </section>
+            <aside class="v_sidebar v_element">
+                {% if user.id %}
+                    {% if score %}
+                        <p class="v_p v_count_done v_element">
+                            Bạn vừa làm bài
+                            {% if exam_code_number %}
+                                (<em class="v_em v_element">#{{ exam_code_number }}</em>)
+                            {% endif %}
+                            và đạt được {{ score }} điểm.</p>
+                    {% endif %}
+
+                    {% if type == 3 %}
+                        <p class="v_p v_count_done v_element">Bạn đã tạo {{ number_of_exam }} đề.</p>
+                    {% elif type == 2 %}
+                        <p class="v_p v_count_done v_element">Bạn đã làm {{ number_of_exam }} đề.</p>
+                    {% else %}
+                        <p class="v_p v_count_done v_element">Còn {{ number_of_exam }} đề có thể làm.</p>
+                    {% endif %}
+                {% endif %}
+            </aside>
+        </main>
+        {#<footer class="v_main_footer v_element"></footer>#}
+    </div>
+</div>
+
+</body>
+</html>

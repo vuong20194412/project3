@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi-vn" dir="ltr" class="v_element">
+<head>
+    <meta charset="UTF-8">
+    <title>View test</title>
+    <style>
+        /*-----layer 0----*/
+        :root {
+            --theme-color: #FA6469BF;
+            --part-color: #A9A9A9FF;
+            --part-border-color: #FA646933;
+        }
+
+        .v_element, .v_element::before, .v_element::after {
+            box-sizing: border-box;
+        }
+
+        /*-----layer 1----*/
+        html {
+            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: #00000000;
+        }
+
+        /*-----layer 2----*/
+        body {
+            font-size: calc(13.0rem / 12.0);
+            font-weight: 400;
+            margin: 0;
+            font-family: serif;
+        }
+
+        /*-----tag--------*/
+        .v_btn {
+            border: 0;
+            outline: 0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            text-align: center;
+        }
+
+        .v_btn:hover {
+            opacity: 0.6;
+        }
+
+        .v_btn:active {
+            opacity: 0.9;
+        }
+
+        .v_li {
+            text-align: match-parent;
+            text-align: -webkit-match-parent;
+        }
+
+        .v_ul .v_li {
+            list-style-type: none;
+        }
+
+        .v_a {
+            text-decoration: none;
+            background-color: transparent;
+            color: inherit;
+        }
+
+        .v_pointer {
+            cursor: pointer;
+        }
+
+        .v_ul.v_horizontal .v_li {
+            float: left;
+        }
+    </style>
+    <style>
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>
